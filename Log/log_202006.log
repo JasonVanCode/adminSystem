@@ -1,0 +1,68 @@
+[2020-06-09 09:19:08][debug][error]:[Call to a member function orderBy() on array at file:/opt/my-project/App/Models/RoleList.php line:15]
+[2020-06-09 09:19:18][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 09:19:24][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 09:19:43][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 09:20:17][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 09:21:02][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 13:10:56][debug][error]:[Call to a member function getTotalCount() on null at file:/opt/my-project/App/HttpController/Api/UserManage.php line:16]
+[2020-06-09 13:11:37][debug][error]:[Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[98] in /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php:59
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php(59): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(127): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/ServerManager.php line:59]
+[2020-06-09 13:12:11][debug][error]:[Call to a member function getTotalCount() on null at file:/opt/my-project/App/HttpController/Api/UserManage.php line:17]
+[2020-06-09 13:13:31][debug][error]:[Call to a member function getTotalCount() on null at file:/opt/my-project/App/HttpController/Api/UserManage.php line:17]
+[2020-06-09 13:13:48][debug][error]:[Call to a member function getTotalCount() on null at file:/opt/my-project/App/HttpController/Api/UserManage.php line:17]
+[2020-06-09 16:05:55][debug][warning]:[Illegal offset type in isset or empty at file:/opt/my-project/vendor/easyswoole/http/src/Request.php line:49]
+[2020-06-09 16:05:55][debug][warning]:[Illegal offset type at file:/opt/my-project/vendor/easyswoole/http/src/Request.php line:49]
+[2020-06-16 17:00:19][debug][notice]:[Undefined variable: res at file:/opt/my-project/App/HttpController/Api/AuthController.php line:87]

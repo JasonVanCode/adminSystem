@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "easyswoole/orm": "^1.4",
+        "easyswoole/redis": "^1.2",
+        "easyswoole/session": "2.x",
+        "easyswoole/validate": "^1.2"
+    }
+}

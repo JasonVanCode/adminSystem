@@ -1,0 +1,38 @@
+[2020-05-26 08:01:20][debug][error]:[Uncaught Error: Class 'Yaconf' not found in /opt/my-project/App/Lib/OrmConnect.php:16
+Stack trace:
+#0 /opt/my-project/EasySwooleEvent.php(17): App\Lib\OrmConnect->connect()
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Core.php(119): EasySwoole\EasySwoole\EasySwooleEvent::initialize()
+#2 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->globalInitialize()
+#3 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /opt/my-project/easyswoole(25): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#6 {main}
+  thrown at file:/opt/my-project/App/Lib/OrmConnect.php line:16]
+[2020-05-26 16:47:52][debug][error]:[Class 'App\Lib\SeesionCheck' not found at file:/opt/my-project/EasySwooleEvent.php line:36]
+[2020-05-26 16:49:34][debug][error]:[Class 'App\Lib\SeesionCheck' not found at file:/opt/my-project/EasySwooleEvent.php line:36]
+[2020-05-27 14:12:20][debug][error]:[Call to protected method App\Lib\ValidateCheck::validateRule() from context 'App\HttpController\Api\Login' at file:/opt/my-project/App/HttpController/Api/Login.php line:14]
+[2020-05-27 14:43:30][debug][error]:[SQLSTATE[42S22] [1054] Unknown column 'password' in 'where clause' at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:68]
+[2020-05-27 16:30:40][debug][notice]:[Undefined index: host at file:/opt/my-project/App/Lib/RedisConnect.php line:18]
+[2020-05-27 16:30:40][debug][notice]:[Undefined index: port at file:/opt/my-project/App/Lib/RedisConnect.php line:19]
+[2020-05-27 16:30:40][debug][notice]:[Undefined index: auth at file:/opt/my-project/App/Lib/RedisConnect.php line:20]
+[2020-05-27 16:30:40][debug][error]:[Return value of EasySwoole\Redis\Config\RedisConfig::getPort() must be of the type integer, null returned at file:/opt/my-project/vendor/easyswoole/redis/src/Config/RedisConfig.php line:45]
+[2020-05-27 16:33:23][debug][error]:[ERR Client sent AUTH, but no password is set at file:/opt/my-project/vendor/easyswoole/redis/src/Redis.php line:2888]
+[2020-05-27 16:42:56][debug][notice]:[Undefined property: App\HttpController\Api\Login::$actionName at file:/opt/my-project/App/HttpController/Base.php line:11]
+[2020-05-27 16:43:57][debug][notice]:[Undefined property: App\HttpController\Api\Login::$actionName at file:/opt/my-project/App/HttpController/Base.php line:11]
+[2020-05-27 16:44:54][debug][notice]:[Undefined property: App\HttpController\Api\Login::$actionName at file:/opt/my-project/App/HttpController/Api/Login.php line:24]
+[2020-05-28 14:00:26][debug][error]:[Call to undefined method App\Lib\RedisConnect::get() at file:/opt/my-project/App/HttpController/Base.php line:20]
+[2020-05-28 14:28:41][debug][notice]:[Non-static method EasySwoole\ORM\AbstractModel::where() should not be called statically at file:/opt/my-project/App/HttpController/Api/Login.php line:64]
+[2020-05-28 14:28:41][debug][error]:[Using $this when not in object context at file:/opt/my-project/vendor/easyswoole/orm/src/AbstractModel.php line:160]
+[2020-05-28 15:26:19][debug][notice]:[Array to string conversion at file:/opt/my-project/App/HttpController/Api/Login.php line:62]
+[2020-05-28 15:27:05][debug][notice]:[Array to string conversion at file:/opt/my-project/App/HttpController/Api/Login.php line:62]
+[2020-05-28 15:28:34][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/mysqli/src/QueryBuilder.php line:983]
+[2020-05-28 15:28:34][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/mysqli/src/QueryBuilder.php line:983]
+[2020-05-28 15:28:34][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:28]
+[2020-05-28 15:28:34][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:28]
+[2020-05-28 15:29:46][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/mysqli/src/QueryBuilder.php line:983]
+[2020-05-28 15:29:46][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/mysqli/src/QueryBuilder.php line:983]
+[2020-05-28 15:29:46][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:28]
+[2020-05-28 15:29:46][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:28]
+[2020-05-28 15:32:52][debug][error]:[SQLSTATE[42S22] [1054] Unknown column 'role_id' in 'where clause' at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:68]
+[2020-05-28 15:34:52][debug][notice]:[Undefined index: mymenu at file:/opt/my-project/App/HttpController/Api/Login.php line:73]
+[2020-05-28 15:36:39][debug][error]:[Call to a member function toArray() on array at file:/opt/my-project/App/HttpController/Api/Login.php line:74]
