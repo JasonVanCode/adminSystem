@@ -23,9 +23,8 @@ class UserController extends Base
     public function save()
     {
         $file = $this->request()->getUploadedFile('file');
-        // $head_img = $this->savefile($file);
         $form = $this->request()->getRequestParam()['form'];
-        //将json转数组
+        // 将json转数组
         $form = json_decode($form,true);
         //判断必填字段是否
         $vali = new ValidateCheck();
@@ -34,8 +33,13 @@ class UserController extends Base
         if(!$res){
             return $this->writeJson(500,'',$vali->getError()->__toString());
         }
-        User::create()->data($form,false)->save();  
-        var_dump(json_decode($form,true));
+        try {
+            $head_img = $this->savefile($file);
+            User::create()->data(['name'=>$form['name'],'passwd'=>md5($form['passwd']),'head_img'=>$head_img,'province'=>$form['provinces'][0],'city'=>$form['provinces'][1],'address'=>$form['address']],false)->save(); 
+            return $this->writeJson(200,'','添加数据成功');
+        } catch (\Exception $e) {
+            return $this->writeJson(500,'','数据添加失败');
+        }
     }
 
     public function savefile($file)
@@ -56,32 +60,19 @@ class UserController extends Base
         }
         $newname = md5(time() . mt_rand(1,1000000)).'.'.$suffix;
         $res = $file->moveTo($basedir . $newname);
-        return $res?$newname:$this->writeJson(500,'','文件上传失败');
-    }
-
-
-    public function getedit()
-    {
-        $params = $this->request()->getRequestParam();
-        $id = isset($params['id'])?$params['id']:null;
-        try {
-            $data = $id?User::create()->where('id',$id)->get(1):[];
-        } catch (\Exception $e) {
-            return $this->writeJson(500,[],'获取数据失败');
-        }
-        return $this->writeJson(200,$data,'获取数据成功');
+        return $res?$basedir . $newname:$this->writeJson(500,'','文件上传失败');
     }
 
     public function del()
     {
         $params = $this->request()->getRequestParam();
         $id = isset($params['id'])?$params['id']:null;
-        try {
+        try {    
             $res = $id?User::create()->destroy(['id' => $id]):false;
         } catch (\Exception $e) {
             return $this->writeJson(500,[],'删除数据失败');
         }
-        return $this->writeJson(200,[],$res?'删除成功':'删除失败');
+        return $this->writeJson($res?200:500,[],$res?'删除成功':'删除失败');
     }
 
 

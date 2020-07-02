@@ -25,7 +25,6 @@ class Router extends AbstractRouter
             //人员管理控制器路由
             $collector->get('/user', '/Api/UserController/getlist');
             $collector->post('/user/save', '/Api/UserController/save');
-            $collector->get('/user/getedit', '/Api/UserController/getedit');
             $collector->post('/user/del', '/Api/UserController/del');
             //权限管理的权限
             $collector->get('/auth', '/Api/AuthController/getlist');
