@@ -12,7 +12,6 @@ class LoginController extends Base
 {
     public function login()
     { 
-        return $this->writeJson(200,'','登录成功');
         $params = $this->request()->getRequestParam();
         //请求字段判断
         $vali = new ValidateCheck();
@@ -22,6 +21,9 @@ class LoginController extends Base
             return $this->writeJson('500','',$vali->getError()->__toString());
         }
         $user = $this->usercheck($params);
+        if(!$user){
+            return false;
+        }
         $uniquestr = $this->savesession($user->id);
         return $this->writeJson(200,['token'=>$uniquestr],'登录成功');
     }
@@ -30,14 +32,16 @@ class LoginController extends Base
     {
         try {
             $user = User::create()->where([
-                'name'=>$params['name'],
-                'passwd'=>$params['password']
+                'username'=>$params['name'],
+                'password'=>$params['password']
             ])->get(1);
         } catch (\Exception $e) {
-            return $this->writeJson(500,'','数据库连接失败');
+             $this->writeJson(200,'','数据库连接失败');
+             return false;
         }
         if(!$user){
-            return $this->writeJson(500,'','该账户不存在');
+            $this->writeJson(200,'','该账户不存在');
+            return false;
         }
         return $user;
     }

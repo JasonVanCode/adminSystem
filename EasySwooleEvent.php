@@ -33,7 +33,6 @@ class EasySwooleEvent implements Event
     public static function onRequest(Request $request, Response $response): bool
     {
         // TODO: Implement onRequest() method.
-        SessionCheck::getInstance()->setCookie($request,$response);
         return true;
     }
 

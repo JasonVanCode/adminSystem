@@ -1,0 +1,12 @@
+[2020-09-07 14:53:39][debug][notice]:[Trying to get property 'id' of non-object at file:/opt/my-project/App/HttpController/Api/LoginController.php line:25]
+[2020-09-07 15:10:07][debug][notice]:[Trying to get property 'id' of non-object at file:/opt/my-project/App/HttpController/Api/LoginController.php line:25]
+[2020-09-07 15:36:44][debug][error]:[Call to undefined method App\Lib\RedisConnect::get() at file:/opt/my-project/App/HttpController/Base.php line:20]
+[2020-09-07 15:39:29][debug][error]:[Call to undefined method App\Lib\RedisConnect::get() at file:/opt/my-project/App/HttpController/Base.php line:20]
+[2020-09-08 00:20:35][debug][error]:[Method EasySwoole\Utility\ArrayToTextTable::__toString() must not throw an exception, caught Error: Call to undefined function EasySwoole\Utility\mb_strlen() at file:/opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Task.php line:0]
+[2020-09-09 09:05:22][debug][error]:[Uncaught EasySwoole\ORM\Exception\Exception: SQLSTATE[HY000] [2002] Connection refused in /opt/my-project/vendor/easyswoole/orm/src/Db/MysqlPool.php:22
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(295): EasySwoole\ORM\Db\MysqlPool->createObject()
+#1 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(253): EasySwoole\Pool\AbstractPool->initObject()
+#2 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
+#3 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
