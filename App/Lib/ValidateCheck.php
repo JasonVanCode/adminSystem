@@ -14,9 +14,12 @@ Class ValidateCheck{
                 break;
             }
             case 'usersave':{
-                $v->addColumn('name','用户名')->required('用户名不能为空')->notEmpty('用户名不能为空');
-                $v->addColumn('passwd','用户密码')->required('用户密码不能为空')->notEmpty('用户密码不能为空');
-                $v->addColumn('provinces','省市')->required('省市不能为空')->notEmpty('省市不能为空');
+                $v->addColumn('username','账号')->required('账号不能为空')->notEmpty('账号不能为空');
+                $v->addColumn('password','密码')->required('密码不能为空')->notEmpty('密码不能为空');
+                $v->addColumn('realname','姓名')->required('姓名不能为空')->notEmpty('姓名不能为空');
+                $v->addColumn('phone','手机号')->required('手机号不能为空')->notEmpty('手机号不能为空');
+                $v->addColumn('email','邮箱')->required('邮箱不能为空')->notEmpty('邮箱不能为空');
+                $v->addColumn('role_id','权限')->required('权限不能为空')->notEmpty('权限不能为空');
                 break;
             }
         }

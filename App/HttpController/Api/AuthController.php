@@ -2,9 +2,7 @@
 namespace App\HttpController\Api;
 
 use App\HttpController\Base;
-use App\Models\RoleList;
-use App\Models\MenuList;
-use App\Models\RoleMenu;
+use App\Models\AdminRole;
 
 class AuthController extends Base
 {
@@ -21,7 +19,7 @@ class AuthController extends Base
 
    public function getrolelist()
    {
-       $data = RoleList::create()->all(null);
+       $data = AdminRole::create()->all(null);
        return $this->writeJson(200,$data,'获取数据成功');
    }
 

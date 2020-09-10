@@ -9,6 +9,10 @@ class AdminUser extends AbstractModel{
       * @var string 
     */
      protected $tableName = 'admin_user';
-
+    
+     public function roles()
+     {
+        $this->belongsToMany(AdminRole::class,'admin_user_role','user_id','role_id');
+     }
      
 }
