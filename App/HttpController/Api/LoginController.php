@@ -1,11 +1,12 @@
 <?php
 namespace App\HttpController\Api;
 
-use App\Models\User;
+use App\Models\AdminUser as User;
 use App\HttpController\Base;
 use App\Lib\ValidateCheck;
 use App\Lib\RedisConnect;
-use App\Models\RoleList;
+use App\Models\AdminRole;
+
 
 
 class LoginController extends Base
@@ -18,7 +19,7 @@ class LoginController extends Base
         $vali = $vali->validateRule('login');
         $res = $vali->validate($params);
         if(!$res){
-            return $this->writeJson('500','',$vali->getError()->__toString());
+            return $this->writeJson('200','',$vali->getError()->__toString());
         }
         $user = $this->usercheck($params);
         if(!$user){
@@ -52,7 +53,7 @@ class LoginController extends Base
         try{
             $redis = RedisConnect::getInstance()->connect();
         }catch(\Exception $e){
-            return $this->writeJson(500,'','redis连接错误');
+            return $this->writeJson(200,'','redis连接错误');
         }
         //生成唯一的32位字符串
         $uniquestr = md5(date('Y-m-d H:i:s').mt_rand(0,1000));
@@ -63,18 +64,14 @@ class LoginController extends Base
     public function getMenulist()
     {
         $params = $this->request()->getRequestParam();
-        if(empty( $params['id'] ) || empty( $params['role_id'])){
-            return $this->writeJson(200,null,'必填参数缺失');
+        // if(empty( $params['id'] ) || empty( $params['role_id'])){
+        //     return $this->writeJson(200,null,'必填参数缺失');
+        // }
+        $data = AdminRole::create()->with(['myrole'])->where(['role_id'=>1])->get(1);
+        if(!$data || !$data->myrole){
+            return $this->writeJson(500,null,'该账号无权登录');
         }
-        $data = RoleList::create()->with(['mymenu'])->where(['id'=>1])->get(1);
-        if(!$data){
-            return $this->writeJson(500,null,'没有该账号信息');
-        }
-        //判断该账号下面的权限列表的信息
-        if(!$data->mymenu){
-            return $this->writeJson(500,null,'该账户没有任何权限');
-        }
-        $menulist = $data->mymenu;
+        $menulist = $data->myrole;
         $menuTree = $this->getMenuTree( $menulist , 0);
         $menuTree = $this->sortMenu($menuTree);
         return $this->writeJson(200,$menuTree,'获取数据成功');
@@ -83,12 +80,12 @@ class LoginController extends Base
     public function getMenuTree($data, $pId)
     {
         $tree = array();
-        foreach($data as $k => $v)
+        foreach($data as $v)
         {
             if($v->pid == $pId )
-            {        //父亲找到儿子
-                $v->subs = $this->getMenuTree($data, $v->id);
-                $pre_data = ['id'=>$v->id,'index'=>$v->index,'title'=>$v->title,'sort'=>$v->sort];
+            {    //父亲找到儿子
+                $v->subs = $this->getMenuTree($data, $v->permission_id);
+                $pre_data = ['id'=>$v->permission_id,'index'=>$v->uri,'title'=>$v->name,'sort'=>$v->orders];
                 if($v->subs){
                     $pre_data['subs'] = $v->subs;
                 }

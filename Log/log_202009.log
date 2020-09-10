@@ -10,3 +10,11 @@ Stack trace:
 #2 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
 #3 {main}
   thrown at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
+[2020-09-09 15:56:58][debug][error]:[Uncaught EasySwoole\ORM\Exception\Exception: SQLSTATE[ost '] [1130] 192.168.8.159' is not allowed to connect to this MySQL server in /opt/my-project/vendor/easyswoole/orm/src/Db/MysqlPool.php:22
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(295): EasySwoole\ORM\Db\MysqlPool->createObject()
+#1 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(253): EasySwoole\Pool\AbstractPool->initObject()
+#2 /opt/my-project/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
+#3 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
+[2020-09-10 09:06:20][debug][error]:[Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) at file:/opt/my-project/vendor/easyswoole/orm/src/Concern/Attribute.php line:258]

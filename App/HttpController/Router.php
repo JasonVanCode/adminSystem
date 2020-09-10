@@ -32,6 +32,8 @@ class Router extends AbstractRouter
             $collector->get('/auth/getrolemenulist', '/Api/AuthController/getroleMenulist');
             $collector->post('/auth/save', '/Api/AuthController/save');
 
+            //上传文件
+            $collector->post('/file/upload', '/Api/UploadController/login');
         });
 
     }
