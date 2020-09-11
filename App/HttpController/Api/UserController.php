@@ -19,9 +19,9 @@ class UserController extends Base
                 ->join('admin_user_role as ro','ro.user_id = us.user_id','LEFT')
                 ->order('user_id')
                 ->limit($perpage * ($page - 1), $perpage)
-                ->withTotalCount()
                 ->group('user_id')
-                ->field(['us.user_id','username','password','realname','avatar','phone','email','sex','locked','ctime','group_concat(ro.role_id) as role_id']);
+                ->field(['us.user_id','username','password','realname','avatar','phone','email','sex','locked','ctime','group_concat(ro.role_id) as role_id'])
+                ->withTotalCount();
         $list = $model->all(null);
         // 总条数
         $total = $model->lastQueryResult()->getTotalCount();
@@ -35,60 +35,43 @@ class UserController extends Base
         $form = $this->request()->getRequestParam()['form'];
         // 将json转数组
         $form = json_decode($form,true);
+  
         //判断必填字段是否
         $vali = new ValidateCheck();
         $vali = $vali->validateRule('usersave');
         $res = $vali->validate($form);
         if(!$res){
-            return $this->writeJson(200,'',$vali->getError()->__toString());
-        }
-        $head_img = '';
-        if($file){
-            $head_img = $this->savefile($file);
+            return $this->writeJson(200,['status'=>'error'],$vali->getError()->__toString());
         }
         $user_id = $form['user_id'];
         $role_id = $form['role_id'];
         unset($form['user_id'],$form['role_id']);
-        try {
-            if($user_id){
-                $form['avatar'] = $head_img?$head_img:$form['avatar'];
-                $res = User::create()->update($form,['user_id',$user_id]);
-            }else{
-                $user_id = User::create($form);
-            }
-           
-        } catch (\Exception $e) {
-            return $this->writeJson(200,'','数据添加失败');
+        $head_img = '';
+        if($file){
+            $head_img = $this->savefile($file);
         }
-
-        $this->handelUserRole($role_id,$user_id);
-        return $this->writeJson(200,'','添加数据成功');
-    }
-
-    /**
-     * 设置属性
-     * @param $arr
-     * @param $type 0 人员新增 1 人员编辑
-     * @return bool
-     * @throws Exception
-     */
-
-    public function handelUserRole($arr,$user_id): bool
-    {
         try {
             $model = AdminUserRole::create();
             if($user_id){
+                $form['avatar'] = $head_img?$head_img:$form['avatar'];
+                User::create()->update($form,['user_id',$user_id]);
                 $model->destroy(['user_id'=>$user_id]);
+            }else{
+                //添加新建时间
+                $form['ctime'] = date('Y-m-d H:i:s');
+                $user_id = User::create()->data($form,false)->save();
             }
-            foreach($arr as $v){
+            foreach($role_id as $v){
                 $savedata[] = ['user_id' => $user_id,'role_id'=>$v];
             } 
             $model->saveAll($savedata,false);
-            return true;
-        } catch (\Throwable $th) {
-            return false;
+        } catch (\Exception $e) {
+            return $this->writeJson(200,['status'=>'error'],'数据添加失败');
         }
+
+        return $this->writeJson(200,['status'=>'success'],'添加数据成功');
     }
+
 
     public function savefile($file)
     {
@@ -113,11 +96,13 @@ class UserController extends Base
         $params = $this->request()->getRequestParam();
         $id = isset($params['id'])?$params['id']:null;
         try {    
-            $res = $id?User::create()->destroy(['id' => $id]):false;
+            if($id){
+                User::create()->destroy($id);
+            }
         } catch (\Exception $e) {
-            return $this->writeJson(500,[],'删除数据失败');
+            return $this->writeJson(200,['status'=>'error'],'删除失败');
         }
-        return $this->writeJson($res?200:500,[],$res?'删除成功':'删除失败');
+        return $this->writeJson(200,['status'=>'success'],'删除成功');
     }
 
 
