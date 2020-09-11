@@ -6,15 +6,14 @@ use App\HttpController\Base;
 use App\Lib\ValidateCheck;
 use App\Lib\RedisConnect;
 use App\Models\AdminRole;
-
-
+use EasySwoole\Mysqli\QueryBuilder;
+use EasySwoole\ORM\DbManager;
 
 class LoginController extends Base
 {
     public function login()
     { 
         $params = $this->request()->getRequestParam();
-        return $this->writeJson(200,[],'登录成功');
         //请求字段判断
         $vali = new ValidateCheck();
         $vali = $vali->validateRule('login');
@@ -26,7 +25,7 @@ class LoginController extends Base
         if(!$user){
             return false;
         }
-        $uniquestr = $this->savesession($user->id);
+        $uniquestr = $this->tokenSave($user);
         return $this->writeJson(200,['token'=>$uniquestr],'登录成功');
     }
 
@@ -49,25 +48,36 @@ class LoginController extends Base
     }
 
 
-    public function savesession($id)
+    public function tokenSave($user)
     {
         try{
             $redis = RedisConnect::getInstance()->connect();
         }catch(\Exception $e){
-            return $this->writeJson(200,'','redis连接错误');
+            return $this->writeJson(200,[],'redis连接错误');
         }
         //生成唯一的32位字符串
         $uniquestr = md5(date('Y-m-d H:i:s').mt_rand(0,1000));
-        $redis->set($uniquestr,$id,3600);
+        $redis->set($uniquestr,json_encode($user),3600);
         return $uniquestr;
     }
 
     public function getMenulist()
     {
-        $params = $this->request()->getRequestParam();
-        // if(empty( $params['id'] ) || empty( $params['role_id'])){
-        //     return $this->writeJson(200,null,'必填参数缺失');
-        // }
+        //请求到这个方法说明已经登录到页面当中了
+        $userinfo = $this->userinfo;
+        $queryBuild = new QueryBuilder();
+        $queryBuild->raw("
+                select a.role_id,c.* from admin_user_role as a
+                left join admin_role_permission as b on a.role_id = b.role_id
+                left join admin_permission as c on c.permission_id = b.permission_id
+                where user_id = ?
+                GROUP BY b.permission_id
+                ORDER BY c.orders", [1]);
+
+        $data = DbManager::getInstance()->query($queryBuild, true, 'default');
+        var_dump($data);
+        return $this->writeJson(200,$data,'获取数据成功');
+
         $data = AdminRole::create()->with(['myrole'])->where(['role_id'=>1])->get(1);
         if(!$data || !$data->myrole){
             return $this->writeJson(500,null,'该账号无权登录');

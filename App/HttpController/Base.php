@@ -8,24 +8,24 @@ use App\Models\AdminLog;
 class Base extends Controller
 {
 
+    protected $userinfo;
+
     protected function onRequest(?string $action): ?bool
     {
         if($action == 'login'){
             $server_list = $this->request()->getServerParams();
             return $this->loginLog($server_list);
         }
-        return true;
-        //判断用户的登录状态
-        $token = $this->request()->getCookieParams('login_token');
-        if(!$token){
-            $this->writeJson(401,null,'请先登录');
+        //下面就是验证用户是否登录
+        $token = $this->request()->getHeader('authorization');
+        if(!isset($token[0])){
+            return $this->response()->withStatus(401);
         }
-        $redis =  RedisConnect::getInstance();
-        $user_id = $redis->get('$token');
-        if( !$user_id ){
-            $this->writeJson(401,null,'登录超时，请重新登录');
+        $obj = RedisConnect::getInstance()->connect();
+        if(!$obj->get($token[0])){
+            return $this->response()->withStatus(401);
         }
-        $server_list = $this->request()->getServerParams();
+        $this->userinfo = json_decode($obj->get($token[0]),true);
         return true;
     }
 
@@ -39,7 +39,7 @@ class Base extends Controller
             'ip'=>$server_list['remote_addr'],
             'uri'=>$server_list['request_uri'],
             'url'=>$server_list['path_info']
-            ]);
+            ])->save();
         return $res?true:false;
     }
 

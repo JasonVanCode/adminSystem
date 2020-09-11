@@ -14,12 +14,17 @@ Class RedisConnect{
     public function connect(): ?Redis
     {
         $conf = \Yaconf::get("redis");
-        return new Redis(new RedisConfig([
-            'host'      => $conf['host'],
-            'port'      => $conf['port'],
-            // 'auth'      => $conf['auth'],
-            'serialize' => RedisConfig::SERIALIZE_NONE
-        ]));
+        try {
+            //code...
+            return new Redis(new RedisConfig([
+                'host'      => $conf['host'],
+                'port'      => $conf['port'],
+                'serialize' => RedisConfig::SERIALIZE_NONE
+            ]));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    
     }
 
 
