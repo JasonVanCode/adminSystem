@@ -14,6 +14,7 @@ class LoginController extends Base
     public function login()
     { 
         $params = $this->request()->getRequestParam();
+        return $this->writeJson(200,[],'登录成功');
         //请求字段判断
         $vali = new ValidateCheck();
         $vali = $vali->validateRule('login');
