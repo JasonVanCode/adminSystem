@@ -3,14 +3,16 @@ namespace App\HttpController\Api;
 
 use App\HttpController\Base;
 use App\Models\AdminRole;
+use App\Models\AdminPermission;
+use App\Models\AdminRolePermission;
 
 class AuthController extends Base
 {
    public function getlist()
    {
-        $menulist =  MenuList::create()->all(null);
+        $menulist =  AdminPermission::create()->all(null);
         if(!$menulist){
-            return  $this->writeJson(200,[],'暂无菜单数据');
+            return  $this->writeJson(200,['status'=>'error'],'暂无菜单数据');
         }
         $menuTree = $this->getMenuTree( $menulist , 0);
         $menuTree = $this->sortMenu($menuTree);
@@ -26,12 +28,12 @@ class AuthController extends Base
    public function getMenuTree($data, $pId)
    {
        $tree = array();
-       foreach($data as $k => $v)
+       foreach($data as $v)
        {
            if($v->pid == $pId )
            {        //父亲找到儿子
-               $v->children = $this->getMenuTree($data, $v->id);
-               $pre_data = ['id'=>$v->id,'label'=>$v->title,'sort'=>$v->sort];
+               $v->children = $this->getMenuTree($data, $v->permission_id);
+               $pre_data = ['id'=>$v->permission_id,'label'=>$v->name,'sort'=>$v->orders];
                if($v->children){
                    $pre_data['children'] = $v->children;
                }
@@ -55,7 +57,7 @@ class AuthController extends Base
         $role_id = isset($params['role_id'])?$params['role_id']:null;
         $result = [];
         if($role_id){
-            $result = RoleMenu::create()->where(['role_id' => $role_id])->column('menu_id');
+            $result = AdminRolePermission::create()->where(['role_id' => $role_id])->column('permission_id');
         }
         return $this->writeJson(200,$result,'获取数据成功');
    }
@@ -64,24 +66,19 @@ class AuthController extends Base
    {
         $params = $this->request()->getRequestParam();
         if(!$params['role_id'] || empty($params['menulist'])){
-            return $this->writeJson(500,'','请选择角色、选择要分配的菜单');
-        }
-        //判断角色是否存在
-         $isexists = RoleList::create()->get(['id'=>$params['role_id']]);
-        if(!$isexists){
-            return $this->writeJson(500,'','该角色不存在');
+            return $this->writeJson(200,['status'=>'fail'],'请选择角色、选择要分配的菜单');
         }
         $data = [];
         foreach($params['menulist'] as $v){
-            $data[] = ['menu_id'=>$v,'role_id'=>$params['role_id']];
+            $data[] = ['permission_id'=>$v,'role_id'=>$params['role_id']];
         }
         //不管之前角色有没有分配菜单，先清该角色id的数据
         try {
-            RoleMenu::create()->destroy(['role_id'=>$params['role_id']]);
-            $res = RoleMenu::create()->saveAll($data,false);
-            return $this->writeJson($res?200:500,null,$res?'获取数据成功':'权限分配失败');
+            AdminRolePermission::create()->destroy(['role_id'=>$params['role_id']]);
+            AdminRolePermission::create()->saveAll($data,false);
+            return $this->writeJson(200,['status'=>'success'],'操作成功');
         } catch (\Exception $e) {
-            return $this->writeJson(500,'','权限分配失败');
+            return $this->writeJson(200,['status'=>'error'],'权限分配失败');
         }
    }
 

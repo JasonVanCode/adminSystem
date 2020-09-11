@@ -33,3 +33,5 @@ Stack trace:
 [2020-09-10 14:39:05][debug][error]:[SQLSTATE[23000] [1052] Column 'user_id' in field list is ambiguous at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:68]
 [2020-09-10 14:41:35][debug][error]:[SQLSTATE[42S22] [1054] Unknown column 'us.role_id' in 'group statement' at file:/opt/my-project/vendor/easyswoole/orm/src/Db/MysqliClient.php line:68]
 [2020-09-11 10:09:17][debug][error]:[Class 'App\HttpController\Api\MenuList' not found at file:/opt/my-project/App/HttpController/Api/AuthController.php line:11]
+[2020-09-11 10:18:40][debug][error]:[Class 'App\HttpController\Api\MenuList' not found at file:/opt/my-project/App/HttpController/Api/AuthController.php line:11]
+[2020-09-11 11:15:13][debug][error]:[Class 'App\HttpController\Api\RoleList' not found at file:/opt/my-project/App/HttpController/Api/AuthController.php line:72]
