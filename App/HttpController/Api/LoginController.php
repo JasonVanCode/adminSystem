@@ -116,8 +116,13 @@ class LoginController extends Base
 
     public function loginOut()
     {
-        
+        try{
+            $redis = RedisConnect::getInstance()->connect();
+            $redis->del($this->token);
+            return $this->writeJson(200,null,'退出成功');
+        }catch(\Exception $e){
+            return $this->writeJson(500,null,'redis连接失败');
+        }
     }
-
 
 }
