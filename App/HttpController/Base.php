@@ -10,6 +10,8 @@ class Base extends Controller
 
     protected $userinfo;
 
+    protected $token;
+
     protected function onRequest(?string $action): ?bool
     {
         if($action == 'login'){
@@ -19,12 +21,15 @@ class Base extends Controller
         //下面就是验证用户是否登录
         $token = $this->request()->getHeader('authorization');
         if(!isset($token[0])){
-            return $this->response()->withStatus(401);
+            $this->response()->withStatus(401);
+            return false;
         }
         $obj = RedisConnect::getInstance()->connect();
         if(!$obj->get($token[0])){
-            return $this->response()->withStatus(401);
+            $this->response()->withStatus(401);
+            return false;
         }
+        $this->token = $token[0];
         $this->userinfo = json_decode($obj->get($token[0]),true);
         return true;
     }

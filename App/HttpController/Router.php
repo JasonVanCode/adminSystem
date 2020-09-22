@@ -10,8 +10,6 @@ namespace App\HttpController;
 
 use EasySwoole\Http\AbstractInterface\AbstractRouter;
 use FastRoute\RouteCollector;
-use EasySwoole\Http\Request;
-use EasySwoole\Http\Response;
 
 class Router extends AbstractRouter
 {
@@ -34,6 +32,8 @@ class Router extends AbstractRouter
 
             //上传文件
             $collector->post('/file/upload', '/Api/UploadController/login');
+            //退出登录
+            $collector->post('/loginout', '/Api/LoginController/loginOut');
         });
 
     }

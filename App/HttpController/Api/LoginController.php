@@ -70,19 +70,15 @@ class LoginController extends Base
                 select a.role_id,c.* from admin_user_role as a
                 left join admin_role_permission as b on a.role_id = b.role_id
                 left join admin_permission as c on c.permission_id = b.permission_id
-                where user_id = ?
+                where a.user_id = ?
                 GROUP BY b.permission_id
                 ORDER BY c.orders", [1]);
 
         $data = DbManager::getInstance()->query($queryBuild, true, 'default');
-        var_dump($data);
-        return $this->writeJson(200,$data,'获取数据成功');
-
-        $data = AdminRole::create()->with(['myrole'])->where(['role_id'=>1])->get(1);
-        if(!$data || !$data->myrole){
-            return $this->writeJson(500,null,'该账号无权登录');
+        if(!$data || !$data->toArray()['result']){
+                return $this->writeJson(500,null,'该账号无权登录');
         }
-        $menulist = $data->myrole;
+        $menulist = $data->toArray()['result'];
         $menuTree = $this->getMenuTree( $menulist , 0);
         $menuTree = $this->sortMenu($menuTree);
         return $this->writeJson(200,$menuTree,'获取数据成功');
@@ -93,15 +89,15 @@ class LoginController extends Base
         $tree = array();
         foreach($data as $v)
         {
-            if($v->pid == $pId )
+            if($v['pid'] == $pId )
             {    //父亲找到儿子
-                $v->subs = $this->getMenuTree($data, $v->permission_id);
-                $pre_data = ['id'=>$v->permission_id,'index'=>$v->uri,'title'=>$v->name,'sort'=>$v->orders];
-                if($v->subs){
-                    $pre_data['subs'] = $v->subs;
+                $v['subs'] = $this->getMenuTree($data, $v['permission_id']);
+                $pre_data = ['id'=>$v['permission_id'],'index'=>$v['uri'],'title'=>$v['name'],'sort'=>$v['orders']];
+                if($v['subs']){
+                    $pre_data['subs'] = $v['subs'];
                 }
-                if($v->icon){
-                    $pre_data['icon'] = $v->icon;
+                if($v['icon']){
+                    $pre_data['icon'] = $v['icon'];
                 }
                 $tree[] = $pre_data;
             }
@@ -117,6 +113,11 @@ class LoginController extends Base
         return $dataArr;
     }
 
+
+    public function loginOut()
+    {
+        
+    }
 
 
 }
