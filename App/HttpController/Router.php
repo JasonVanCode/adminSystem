@@ -29,6 +29,8 @@ class Router extends AbstractRouter
             $collector->get('/auth/getrolelist', '/Api/AuthController/getrolelist');
             $collector->get('/auth/getrolemenulist', '/Api/AuthController/getroleMenulist');
             $collector->post('/auth/save', '/Api/AuthController/save');
+            //获取switch游戏数据
+            $collector->get('/switch/getlist', '/Api/SwitchController/getlist');
 
             //上传文件
             $collector->post('/file/upload', '/Api/UploadController/login');
