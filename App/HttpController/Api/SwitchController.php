@@ -11,7 +11,11 @@ class SwitchController extends Base
         $params = $this->request()->getRequestParam();
         $page = isset($params['page'])?$params['page']:1;
         $perpage = isset($params['perpage'])?$params['perpage']:10;
-        $model = EshopGame::create()->limit($perpage * ($page - 1), $perpage)->withTotalCount();
+        $name = isset($params['name'])?$params['name']:'';
+        $model = EshopGame::create()->order('sale_time','DESC')->limit($perpage * ($page - 1), $perpage)->withTotalCount();
+        if( $name){
+            $model->where('game_name','%'.$name.'%','like');
+        }
         // 列表数据
         $list = $model->all(null);
         $result = $model->lastQueryResult();
