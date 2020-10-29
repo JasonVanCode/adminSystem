@@ -15,6 +15,7 @@ class Base extends Controller
     protected function onRequest(?string $action): ?bool
     {
         if($action == 'login'){
+            return true;
             $server_list = $this->request()->getServerParams();
             return $this->loginLog($server_list);
         }
