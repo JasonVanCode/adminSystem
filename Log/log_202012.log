@@ -1,0 +1,33 @@
+[2020-12-18 08:40:25][debug][notice]:[Array to string conversion at file:/opt/my-project/vendor/easyswoole/config/src/TableConfig.php line:47]
+[2020-12-18 08:43:13][debug][error]:[Uncaught Error: Call to undefined function EasySwoole\EasySwoole\Command\DefaultCommand\dd() in /opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php:70
+Stack trace:
+#0 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(46): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#1 /opt/my-project/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(62): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#2 /opt/my-project/easyswoole(24): EasySwoole\EasySwoole\Command\CommandRunner->run(Array)
+#3 {main}
+  thrown at file:/opt/my-project/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php line:70]
+[2020-12-18 17:04:42][debug][notice]:[Undefined property: EasySwoole\Http\Dispatcher::$classKey at file:/opt/my-project/vendor/easyswoole/http/src/Dispatcher.php line:271]
+[2020-12-18 17:05:00][debug][notice]:[Undefined property: EasySwoole\Http\Dispatcher::$classKey at file:/opt/my-project/vendor/easyswoole/http/src/Dispatcher.php line:271]
+[2020-12-23 14:54:14][debug][error]:[Uncaught EasySwoole\ORM\Exception\Exception: SQLSTATE[HY000] [2002] No route to host in /opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php:22
+Stack trace:
+#0 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(295): EasySwoole\ORM\Db\MysqlPool->createObject()
+#1 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(253): EasySwoole\Pool\AbstractPool->initObject()
+#2 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
+#3 {main}
+  thrown at file:/opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
+[2020-12-23 14:57:11][debug][error]:[Uncaught EasySwoole\ORM\Exception\Exception: SQLSTATE[HY000] [2002] No route to host in /opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php:22
+Stack trace:
+#0 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(295): EasySwoole\ORM\Db\MysqlPool->createObject()
+#1 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(253): EasySwoole\Pool\AbstractPool->initObject()
+#2 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
+#3 {main}
+  thrown at file:/opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
+[2020-12-23 15:01:36][debug][error]:[Uncaught EasySwoole\ORM\Exception\Exception: SQLSTATE[HY000] [2002] No route to host in /opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php:22
+Stack trace:
+#0 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(295): EasySwoole\ORM\Db\MysqlPool->createObject()
+#1 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(253): EasySwoole\Pool\AbstractPool->initObject()
+#2 /opt/easyAdmin/vendor/easyswoole/pool/src/AbstractPool.php(227): EasySwoole\Pool\AbstractPool->keepMin(5)
+#3 {main}
+  thrown at file:/opt/easyAdmin/vendor/easyswoole/orm/src/Db/MysqlPool.php line:22]
+[2020-12-23 15:03:32][debug][error]:[SQLSTATE[42000] [1055] Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'my_project.a.role_id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by at file:/opt/easyAdmin/vendor/easyswoole/mysqli/src/Client.php line:94]
+[2020-12-23 15:03:48][debug][error]:[SQLSTATE[42000] [1055] Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'my_project.a.role_id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by at file:/opt/easyAdmin/vendor/easyswoole/mysqli/src/Client.php line:94]
