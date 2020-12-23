@@ -15,6 +15,7 @@ class TestProcess extends AbstractProcess {
         //当进程启动后，会执行的回调
         var_dump($this->getProcessName()." run");
         var_dump($arg);
+
         // TODO: Implement run() method.
     }
 

@@ -18,7 +18,7 @@ Class OrmConnect{
         $config->setDatabase($conf['Database']);
         $config->setUser($conf['User']);
         $config->setPassword($conf['Password']);
-        $config->setHost($conf['Host']);
+        $config->setHost('192.168.137.53');
         DbManager::getInstance()->addConnection(new Connection($config));
     }
 

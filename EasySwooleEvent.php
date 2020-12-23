@@ -6,9 +6,8 @@ use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
 use App\Lib\OrmConnect;
-use App\Lib\SessionCheck;
-use EasySwoole\Session\Session;
-use EasySwoole\Session\SessionFileHandler;
+use EasySwoole\Component\Process\Manager;
+use App\Process\TestProcess;
 
 class EasySwooleEvent implements Event
 {
@@ -23,11 +22,15 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-        // TODO: Implement mainServerCreate() method.
-         //可以自己实现一个标准的session handler
-         $handler = new SessionFileHandler(EASYSWOOLE_TEMP_DIR);
-         //表示cookie name   还有save path
-         Session::getInstance($handler,'easy_session','session_dir');
+        $processConfig= new \EasySwoole\Component\Process\Config();
+        $processConfig->setProcessName('testProcess');//设置进程名称
+        $processConfig->setProcessGroup('Test');//设置进程组
+        $processConfig->setArg(['a'=>123]);//传参
+        $processConfig->setRedirectStdinStdout(false);//是否重定向标准io
+        $processConfig->setPipeType($processConfig::PIPE_TYPE_SOCK_DGRAM);//设置管道类型
+        $processConfig->setEnableCoroutine(true);//是否自动开启协程
+        $processConfig->setMaxExitWaitTime(3);//最大退出等待时间
+        Manager::getInstance()->addProcess(new TestProcess($processConfig));
     }
 
     public static function onRequest(Request $request, Response $response): bool
